@@ -5,11 +5,11 @@
 #include "matrixexception.h"
 using namespace std;
 
-template <typename T>
+template <typename SomeValueType>
 class Matrix;
 
-template <typename T>
-std::ostream &operator << (std::ostream &out, const Matrix<T> &temp);/*
+template <typename SomeValueType>
+std::ostream &operator << (std::ostream &out, const Matrix<SomeValueType> &temp);/*
 {
 	for (int i = 0; i < temp.n; i++)
 	{
@@ -21,8 +21,8 @@ std::ostream &operator << (std::ostream &out, const Matrix<T> &temp);/*
 	}
 	return out;
 }*/
-template <typename T>
-std::istream &operator >> (std::istream &input, Matrix<T> &matr);/*
+template <typename SomeValueType>
+std::istream &operator >> (std::istream &input, Matrix<SomeValueType> &matr);/*
 {
     for (int i = 0; i < matr.n; i++) 
     {
@@ -36,31 +36,31 @@ std::istream &operator >> (std::istream &input, Matrix<T> &matr);/*
     }
     return input;
 }*/
-template <typename T>
+template <typename SomeValueType>
 class Matrix
 {
 public:
-	Matrix<T>() :n(0), m(0), matrix(nullptr) {};
+	Matrix<SomeValueType>() :n(0), m(0), matrix(nullptr) {};
 	Matrix(unsigned int rows, unsigned int columns);
 	Matrix(const Matrix &copy);
-	~Matrix<T>();
+	~Matrix<SomeValueType>();
 	Matrix operator + (const Matrix&);
 	Matrix operator - (const Matrix&);
 	Matrix operator * (const Matrix&);
 	Matrix &operator = (const Matrix&);
 	bool operator == (const Matrix&);
-	T* operator [] (unsigned int);
+	SomeValueType* operator [] (unsigned int);
 	unsigned int Rows() const;
 	unsigned int Columns() const;
-	friend std::ostream &operator << <>(std::ostream &out, const Matrix<T> &temp);
-	friend std::istream &operator >> <>(std::istream &input, Matrix<T> &matr);
+	friend std::ostream &operator << <>(std::ostream &out, const Matrix<SomeValueType> &temp);
+	friend std::istream &operator >> <>(std::istream &input, Matrix<SomeValueType> &matr);
 private:
-	T **matrix;
+	SomeValueType **matrix;
 	unsigned int n;	// ñòðîê
 	unsigned int m;	// ñòîëáöîâ
 };/*
-template <typename T>
-std::ostream &operator << (std::ostream &out, const Matrix<T> &temp)
+template <typename SomeValueType>
+std::ostream &operator << (std::ostream &out, const Matrix<SomeValueType> &temp)
 {
 	for (int i = 0; i < temp.n; i++)
 	{
@@ -72,8 +72,8 @@ std::ostream &operator << (std::ostream &out, const Matrix<T> &temp)
 	}
 	return out;
 };
-template <typename T>
-std::istream &operator >> (std::istream &input, Matrix<T> &matr)
+template <typename SomeValueType>
+std::istream &operator >> (std::istream &input, Matrix<SomeValueType> &matr)
 {
     for (int i = 0; i < matr.n; i++) 
     {
