@@ -9,34 +9,34 @@
 using namespace std;
 #ifndef matrix_cpp
 #define matrix_cpp
-template <typename T>
-Matrix<T>::Matrix(unsigned int rows, unsigned int columns) :n(rows), m(columns)
+template <typename SomeValueType>
+Matrix<SomeValueType>::Matrix(unsigned int rows, unsigned int columns) :n(rows), m(columns)
 {
-	matrix = new T*[n];
+	matrix = new SomeValueType*[n];
 	for (int i = 0; i<n; i++)
 	{
-		matrix[i] = new T[m];
+		matrix[i] = new SomeValueType[m];
 		for (int j = 0; j<m; j++)
 		{
 			matrix[i][j] = 0;
 		}
 	}
 }
-template <typename T>
-Matrix<T>::Matrix(const Matrix& copy) :n(copy.n), m(copy.m)
+template <typename SomeValueType>
+Matrix<SomeValueType>::Matrix(const Matrix& copy) :n(copy.n), m(copy.m)
 {
-	matrix = new T*[n];
+	matrix = new SomeValueType*[n];
 	for (int i = 0; i<n; i++)
 	{
-		matrix[i] = new T[m];
+		matrix[i] = new SomeValueType[m];
 		for (int j = 0; j<m; j++)
 		{
 			matrix[i][j] = copy.matrix[i][j];
 		}
 	}
 }
-template <typename T>
-Matrix<T>::~Matrix()
+template <typename SomeValueType>
+Matrix<SomeValueType>::~Matrix()
 {
 	if (matrix != nullptr)
 	{
@@ -47,8 +47,8 @@ Matrix<T>::~Matrix()
 		delete[] matrix;
 	}
 }
-template <typename T>
-Matrix<T> Matrix<T>::operator + (const Matrix<T> &matr)
+template <typename SomeValueType>
+Matrix<SomeValueType> Matrix<SomeValueType>::operator + (const Matrix<SomeValueType> &matr)
 {
 		if (this->n!=matr.n || this->m!=matr.m) 
 	{
@@ -68,8 +68,8 @@ Matrix<T> Matrix<T>::operator + (const Matrix<T> &matr)
 	}
 	return result;
 }
-template <typename T>
-Matrix<T> Matrix<T>::operator - (const Matrix<T> &matr)
+template <typename SomeValueType>
+Matrix<SomeValueType> Matrix<SomeValueType>::operator - (const Matrix<SomeValueType> &matr)
 {
 	if (this->n!=matr.n || this->m!=matr.m) 
 	{
@@ -89,8 +89,8 @@ Matrix<T> Matrix<T>::operator - (const Matrix<T> &matr)
 	}
 	return result;
 }
-template <typename T>
-Matrix<T> Matrix<T>::operator * (const Matrix<T> &matr)
+template <typename SomeValueType>
+Matrix<SomeValueType> Matrix<SomeValueType>::operator * (const Matrix<SomeValueType> &matr)
 {
 	if (this->n!=matr.m) 
 	{
@@ -105,7 +105,7 @@ Matrix<T> Matrix<T>::operator * (const Matrix<T> &matr)
 	{
 		for (int j = 0; j < matr.m; j++)
 		{
-			T value = 0;
+			SomeValueType value = 0;
 			for (int k = 0; k < m; k++)
 			{
 				value += matrix[i][k] * matr.matrix[k][j];
@@ -115,8 +115,8 @@ Matrix<T> Matrix<T>::operator * (const Matrix<T> &matr)
 	}
 	return result;
 }
-template <typename T>
-Matrix<T> &Matrix<T>::operator = (const Matrix<T> &matr)
+template <typename SomeValueType>
+Matrix<SomeValueType> &Matrix<SomeValueType>::operator = (const Matrix<SomeValueType> &matr)
 {
 	if (this != &matr)
 	{
@@ -130,10 +130,10 @@ Matrix<T> &Matrix<T>::operator = (const Matrix<T> &matr)
 		}
 		n = matr.n;
 		m = matr.m;
-		matrix = new T*[n];
+		matrix = new SomeValueType*[n];
 		for (int i = 0; i<n; i++)
 		{
-			matrix[i] = new T[m];
+			matrix[i] = new SomeValueType[m];
 			for (int j = 0; j<m; j++)
 			{
 				matrix[i][j] = matr.matrix[i][j];
@@ -142,8 +142,8 @@ Matrix<T> &Matrix<T>::operator = (const Matrix<T> &matr)
 	}
 	return *this;
 }
-template <typename T>
-bool Matrix<T>::operator == (const Matrix<T> &matr) 
+template <typename SomeValueType>
+bool Matrix<SomeValueType>::operator == (const Matrix<SomeValueType> &matr) 
 {
 	if (n!=matr.n || m!=matr.m) 
 	{
@@ -162,8 +162,8 @@ bool Matrix<T>::operator == (const Matrix<T> &matr)
 	}
 	return true;
 }
-template <typename T>
-T* Matrix<T>::operator [] (unsigned int index)
+template <typename SomeValueType>
+T* Matrix<SomeValueType>::operator [] (unsigned int index)
 {
 	if (matrix==nullptr) 
 	{
@@ -178,18 +178,18 @@ T* Matrix<T>::operator [] (unsigned int index)
 		throw RowException();
 	}
 }
-template <typename T>
-unsigned int Matrix<T>::Rows() const
+template <typename SomeValueType>
+unsigned int Matrix<SomeValueType>::Rows() const
 {
 	return n;
 }
-template <typename T>
-unsigned int Matrix<T>::Columns() const
+template <typename SomeValueType>
+unsigned int Matrix<SomeValueType>::Columns() const
 {
 	return m;
 }
-template <typename T>
-std::ostream &operator << (std::ostream &out, const Matrix<T> &temp)
+template <typename SomeValueType>
+std::ostream &operator << (std::ostream &out, const Matrix<SomeValueType> &temp)
 {
 	for (int i = 0; i < temp.n; i++)
 	{
@@ -201,8 +201,8 @@ std::ostream &operator << (std::ostream &out, const Matrix<T> &temp)
 	}
 	return out;
 };
-template <typename T>
-std::istream &operator >> (std::istream &input, Matrix<T> &matr)
+template <typename SomeValueType>
+std::istream &operator >> (std::istream &input, Matrix<SomeValueType> &matr)
 {
     for (int i = 0; i < matr.n; i++) 
     {
