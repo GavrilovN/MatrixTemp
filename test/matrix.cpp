@@ -163,7 +163,7 @@ bool Matrix<SomeValueType>::operator == (const Matrix<SomeValueType> &matr)
 	return true;
 }
 template <typename SomeValueType>
-T* Matrix<SomeValueType>::operator [] (unsigned int index)
+SomeValueType* Matrix<SomeValueType>::operator [] (unsigned int index)
 {
 	if (matrix==nullptr) 
 	{
